@@ -1,0 +1,8 @@
+{
+  "name": "PantryChef",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}
