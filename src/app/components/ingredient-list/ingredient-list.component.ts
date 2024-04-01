@@ -8,7 +8,7 @@ import { IngredientService } from '../../services/ingredient.service';
 })
 export class IngredientListComponent implements OnInit {
   ingredients: any[] = [];
-  @Output() onIngredientsSelected = new EventEmitter<any[]>();
+  @Output() ingredientsSelected = new EventEmitter<string[]>();
 
   constructor(private ingredientService: IngredientService) { }
 
@@ -39,7 +39,8 @@ export class IngredientListComponent implements OnInit {
   // }
 
   submitSelection() {
-    const selectedIngredients = this.ingredients.filter(ingredient => ingredient.selected);
-    this.onIngredientsSelected.emit(selectedIngredients);
+    const selectedIngredients = this.ingredients.filter(ingredient => ingredient.selected).map(ingredient => ingredient.name);
+    console.log('Selected Ingredients:', selectedIngredients);
+    this.ingredientsSelected.emit(selectedIngredients);
   }
 }

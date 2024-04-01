@@ -1,6 +1,7 @@
 <ul>
   <li *ngFor="let recipe of recipes">
     <h2>{{ recipe.name }}</h2>
+    <p>Ingredients matched: {{ recipe.matchCount }}</p>
     <p>Description: {{ recipe.description }}</p>
     <p>Cooking Time: {{ recipe.cookingTime }}</p>
     <p>Servings: {{ recipe.servings }}</p>

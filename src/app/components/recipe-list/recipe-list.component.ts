@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./recipe-list.component.scss']
 })
 export class RecipeListComponent implements OnInit {
-  @Input() recipes: any[] = [];
+  @Input() recipes: any[] =[];
 
   constructor() {}
 

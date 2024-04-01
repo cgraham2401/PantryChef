@@ -2,21 +2,29 @@ import { Component, OnInit } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { RecipeService } from 'src/app/services/recipe.service';
 
+interface Recipe {
+  cookingTime: string;
+  ingredients: string[]; 
+  name: string;
+  servings: number; 
+  steps: string[]; 
+  matchCount?: number; 
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  filteredRecipes: any[] = [];
+  selectedIngredients: string[] = []; // This should hold the selected ingredient names as strings
+  filteredRecipes: Recipe[] = []; // This will hold the filtered recipes with match counts
 
   constructor(private camera: Camera, private recipeService: RecipeService) {}
 
-  ngOnInit(): void {
-    this.fetchAllRecipes();
-  }
+  ngOnInit(): void {}
 
-  takePicture() {
+  takePicture(): void {
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -26,7 +34,6 @@ export class HomePage implements OnInit {
 
     this.camera.getPicture(options).then(
       (imageData) => {
-
         let base64Image = 'data:image/jpeg;base64,' + imageData;
         console.log(base64Image);
       },
@@ -36,39 +43,30 @@ export class HomePage implements OnInit {
     );
   }
 
-  filterRecipes(selectedIngredients: any[]) {
-    console.log('Selected Ingredients:', selectedIngredients[0].id); // Log the selected ingredients
-    if (selectedIngredients.length > 0) {
-      // Looking for recipes based on the first selected ingredient for simplicity
-      const ingredientId = selectedIngredients[0].id;
-
-      this.recipeService.getRecipesByIngredient(ingredientId).subscribe({
-        next: (recipes) => {
-          this.filteredRecipes = recipes;
-          console.log('Filtered Recipes:', this.filteredRecipes); // Log the recipes to see what's returned
-        },
-        error: (err) => {
-          console.error('Error fetching recipes by ingredient:', err); // Log any errors that occur
-        }
-      });
-    } else {
-      this.filteredRecipes = [];
-    }
+  // Called when the user selects ingredients
+  handleIngredientSelection(selectedIngredientNames: string[]): void {
+    // Directly use the selected ingredient names for filtering recipes
+    this.filterRecipes(selectedIngredientNames);
   }
 
-  fetchAllRecipes() {
-  this.recipeService.getRecipes().subscribe({
-    next: (recipes) => {
-      console.log('All recipes:', recipes); // Log all recipes to see what's returned
-    },
-    error: (error) => {
-      console.error('Error fetching all recipes:', error);
-    }
-  });
-}
+  // Filter recipes based on selected ingredients
+  filterRecipes(selectedIngredientNames: string[]): void {
+    this.selectedIngredients = selectedIngredientNames; // Update the selected ingredients
+    this.recipeService.getRecipes().subscribe((allRecipes: Recipe[]) => {
+      // First, filter the recipes to those that include any of the selected ingredients
+      const matchingRecipes = allRecipes.filter(recipe =>
+        recipe.ingredients.some(ingredient => this.selectedIngredients.includes(ingredient))
+      );
 
+      // Then, calculate the number of selected ingredients present in each recipe
+      matchingRecipes.forEach(recipe => {
+        recipe.matchCount = recipe.ingredients.filter(ingredient =>
+          this.selectedIngredients.includes(ingredient)
+        ).length;
+      });
 
-  handleIngredientSelection(selectedIngredients: any[]) {
-    console.log(selectedIngredients);
+      // Sort the recipes based on the match count
+      this.filteredRecipes = matchingRecipes.sort((a, b) => (b.matchCount || 0) - (a.matchCount || 0));
+    });
   }
 }

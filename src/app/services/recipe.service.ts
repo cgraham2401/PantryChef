@@ -20,16 +20,20 @@ export class RecipeService {
 
   // Fetch all recipes
   getRecipes() {
-    return this.firestore.collection('Recipes').valueChanges({ idField: 'id' }).pipe(
-      tap(recipes => console.log('All recipes:', recipes)), // Log the results
-      catchError(err => {
-        console.error('Error fetching recipes:', err);
-        return throwError(() => new Error('Error fetching recipes'));
-      })
+    return this.firestore.collection('Recipes').snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Recipe; 
+        const id = a.payload.doc.id;
+        return { id, ...data }; 
+      }))
     );
   }
   
-  
+  getRecipesWithAnyOfTheseIngredients(selectedIngredients: string[]) {
+    return this.firestore.collection('Recipes', ref => 
+      ref.where('ingredients', 'array-contains-any', selectedIngredients))
+      .valueChanges({ idField: 'id' });
+  }
   // getRecipes() {
   //   return this.firestore.collection('Recipes').valueChanges({ idField: 'id' });
   // }
