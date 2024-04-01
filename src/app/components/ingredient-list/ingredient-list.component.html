@@ -1,5 +1,7 @@
 <ul>
   <li *ngFor="let ingredient of ingredients">
+    <ion-checkbox [(ngModel)]="ingredient.selected"></ion-checkbox>
     {{ ingredient.name }}
   </li>
 </ul>
+<ion-button (click)="submitSelection()">Submit Ingredients</ion-button>

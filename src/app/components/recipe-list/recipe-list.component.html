@@ -1,5 +1,20 @@
 <ul>
   <li *ngFor="let recipe of recipes">
-    {{ recipe.name }} - {{ recipe.description }}
+    <h2>{{ recipe.name }}</h2>
+    <p>Description: {{ recipe.description }}</p>
+    <p>Cooking Time: {{ recipe.cookingTime }}</p>
+    <p>Servings: {{ recipe.servings }}</p>
+    <h3>Ingredients Needed:</h3>
+    <ul>
+      <li *ngFor="let ingredient of recipe.ingredients">
+        Ingredient: {{ ingredient }}
+      </li>
+    </ul>
+    <h4>Steps:</h4> 
+    <ol>
+      <li *ngFor="let step of recipe.steps">
+        {{ step }} 
+      </li>
+    </ol>
   </li>
 </ul>

@@ -5,10 +5,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar placeholder="Search recipes..."></ion-searchbar>
-  <ion-list>
-    <!-- Recipe items will be "dynamically" inserted here -->
-  </ion-list>
+  <app-ingredient-list (onIngredientsSelected)="filterRecipes($event)"></app-ingredient-list>
+  <app-recipe-list [recipes]="filteredRecipes"></app-recipe-list>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="takePicture()">
       <ion-icon name="camera"></ion-icon>

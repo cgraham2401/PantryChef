@@ -12,9 +12,9 @@ import { AppRoutingModule } from './app-routing.module';
 
 //components
 import { RecipeSearchComponent } from './components/recipe-search/recipe-search.component';
-import { RecipeListComponent } from './components/recipe-list/recipe-list.component';
+//import { RecipeListComponent } from './components/recipe-list/recipe-list.component';
 import { CameraAccessComponent } from './components/camera-access/camera-access.component';
-import { IngredientListComponent } from './components/ingredient-list/ingredient-list.component';
+//import { IngredientListComponent } from './components/ingredient-list/ingredient-list.component';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
@@ -29,13 +29,14 @@ import { IngredientService } from './services/ingredient.service';
 @NgModule({
   declarations: [AppComponent,
     RecipeSearchComponent,
-    RecipeListComponent,
-    IngredientListComponent,
+    //RecipeListComponent,
+    //IngredientListComponent,
     CameraAccessComponent],
   imports: [BrowserModule, FormsModule , IonicModule.forRoot(), AppRoutingModule,  AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Camera, RecipeService,
     IngredientService],
   bootstrap: [AppComponent],
+  
 })
 export class AppModule {}
