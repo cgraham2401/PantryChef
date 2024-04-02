@@ -11,6 +11,19 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'submit-review',
+    loadChildren: () => import('./submit-review/submit-review.module').then( m => m.SubmitReviewPageModule)
+  },
+  {
+    path: 'recipe-reviews',
+    loadChildren: () => import('./recipe-reviews/recipe-reviews.module').then( m => m.RecipeReviewsPageModule)
+  },
+  {
+    path: 'recipe-search',
+    loadChildren: () => import('./recipe-search/recipe-search.module').then( m => m.RecipeSearchPageModule)
+  },
+  
 ];
 
 @NgModule({

@@ -17,35 +17,35 @@ interface Recipe {
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  selectedIngredients: string[] = []; // This should hold the selected ingredient names as strings
-  filteredRecipes: Recipe[] = []; // This will hold the filtered recipes with match counts
+  selectedIngredients: string[] = []; // hold the selected ingredient names as strings
+  filteredRecipes: Recipe[] = []; // hold the filtered recipes with match counts
 
   constructor(private camera: Camera, private recipeService: RecipeService) {}
 
   ngOnInit(): void {}
 
-  takePicture(): void {
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-    };
+  // takePicture(): void {
+  //   const options: CameraOptions = {
+  //     quality: 100,
+  //     destinationType: this.camera.DestinationType.DATA_URL,
+  //     encodingType: this.camera.EncodingType.JPEG,
+  //     mediaType: this.camera.MediaType.PICTURE,
+  //   };
 
-    this.camera.getPicture(options).then(
-      (imageData) => {
-        let base64Image = 'data:image/jpeg;base64,' + imageData;
-        console.log(base64Image);
-      },
-      (error) => {
-        console.error('Camera error:', error);
-      }
-    );
-  }
-
+  //   this.camera.getPicture(options).then(
+  //     (imageData) => {
+  //       let base64Image = 'data:image/jpeg;base64,' + imageData;
+  //       console.log(base64Image);
+  //     },
+  //     (error) => {
+  //       console.error('Camera error:', error);
+  //     }
+  //   );
+  //}
+  
   // Called when the user selects ingredients
   handleIngredientSelection(selectedIngredientNames: string[]): void {
-    // Directly use the selected ingredient names for filtering recipes
+    // use selected ingredient for filtering
     this.filterRecipes(selectedIngredientNames);
   }
 
@@ -53,7 +53,7 @@ export class HomePage implements OnInit {
   filterRecipes(selectedIngredientNames: string[]): void {
     this.selectedIngredients = selectedIngredientNames; // Update the selected ingredients
     this.recipeService.getRecipes().subscribe((allRecipes: Recipe[]) => {
-      // First, filter the recipes to those that include any of the selected ingredients
+      //filter recipes to include any of the selected ingredients
       const matchingRecipes = allRecipes.filter(recipe =>
         recipe.ingredients.some(ingredient => this.selectedIngredients.includes(ingredient))
       );

@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>PantryChef</ion-title>
+    <ion-buttons slot="end"></ion-buttons>
+    <ion-button routerLink="/home">Go Home</ion-button>
+    <ion-button routerLink="/recipe-reviews">Read Reviews</ion-button>
+    <ion-button routerLink="/submit-review">Submit a Recipe Review</ion-button>
+    <ion-button routerLink="/recipe-search">Search Recipes</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-select label="Recipe" [(ngModel)]="selectedRecipeId" placeholder="Select Recipe">
+      <ion-select-option *ngFor="let recipe of recipes" [value]="recipe.id">
+        {{ recipe.name }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-input aria-label="User Identifier" [(ngModel)]="userId" type="text" placeholder="Enter your user id here"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input aria-label="User Review" [(ngModel)]="reviewText" type="text" placeholder="Write your review here"></ion-input>
+  </ion-item>
+  
+
+  <ion-button expand="block" (click)="takePicture()">Take Picture</ion-button>
+  <ion-button expand="block" (click)="saveReview()">Submit Review</ion-button>
+</ion-content>

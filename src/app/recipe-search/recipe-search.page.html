@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+  <ion-title>PantryChef</ion-title>
+    <ion-buttons slot="end"></ion-buttons>
+    <ion-button routerLink="/home">Go Home</ion-button>
+    <ion-button routerLink="/recipe-reviews">Read Reviews</ion-button>
+    <ion-button routerLink="/submit-review">Submit a Recipe Review</ion-button>
+    <ion-button routerLink="/recipe-search">Search Recipes</ion-button>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-button (click)="fetchAllRecipes()">Show All Recipes</ion-button>
+  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchRecipes()"></ion-searchbar>
+  <ul>
+    <li *ngFor="let recipe of filteredRecipes">
+      <h2>{{ recipe.name }}</h2>
+      <p>Description: {{ recipe.description }}</p>
+      <p>Cooking Time: {{ recipe.cookingTime }}</p>
+      <p>Servings: {{ recipe.servings }}</p>
+      <h3>Ingredients:</h3>
+      <ul>
+        <li *ngFor="let ingredient of recipe.ingredients">
+          {{ ingredient }}
+        </li>
+      </ul>
+      <h4>Steps:</h4>
+      <ol>
+        <li *ngFor="let step of recipe.steps">
+          {{ step }}
+        </li>
+      </ol>
+    </li>
+  </ul>
+</ion-content>
+
+

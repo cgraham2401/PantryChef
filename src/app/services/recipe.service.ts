@@ -51,31 +51,4 @@ export class RecipeService {
 
   }
 
-
-
-
-// getRecipesByIngredient(ingredientId: string) {
-//   return this.firestore.collection('Recipes', ref => ref.where('ingredients', 'array-contains', ingredientId))
-//     .snapshotChanges() // Use snapshotChanges to access the metadata, including the doc ID
-//     .pipe(
-//       map(actions => actions.map(a => {
-//         const data = a.payload.doc.data() as Recipe;
-//         const id = a.payload.doc.id;
-//         return { id, ...data }; // Combine the id and the rest of the data
-//       })),
-//       tap(recipes => console.log('Recipes with ingredient:', recipes)), // Log the results
-//       catchError(err => {
-//         console.error('Error fetching recipes by ingredient:', err);
-//         return throwError(() => new Error('Error fetching recipes by ingredient'));
-//       })
-//     );
-// }
-
-
-
-
-  // Get recipes by ingredient
-//   getRecipesByIngredient(ingredientId: string) {
-//     return this.firestore.collection('Recipes', ref => ref.where('Ingredients', 'array-contains', ingredientId)).valueChanges({ idField: 'id' });
-//   }
 }

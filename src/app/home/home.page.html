@@ -1,15 +1,20 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>PantryChef</ion-title>
+    <ion-buttons slot="end"></ion-buttons>
+    <ion-button routerLink="/home">Go Home</ion-button>
+    <ion-button routerLink="/recipe-reviews">Read Reviews</ion-button>
+    <ion-button routerLink="/submit-review">Submit a Recipe Review</ion-button>
+    <ion-button routerLink="/recipe-search">Search Recipes</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <app-ingredient-list (ingredientsSelected)="filterRecipes($event)"></app-ingredient-list>
   <app-recipe-list [recipes]="filteredRecipes"></app-recipe-list>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="takePicture()">
       <ion-icon name="camera"></ion-icon>
     </ion-fab-button>
-  </ion-fab>
+  </ion-fab> -->
 </ion-content>
