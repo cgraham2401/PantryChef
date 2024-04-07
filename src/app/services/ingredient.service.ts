@@ -17,10 +17,10 @@ export class IngredientService {
       tap(data => console.log('Fetched ingredients:', data)), 
       catchError(err => {
         console.error('Error fetching ingredients', err);
-        return throwError(() => err); // Pass a factory function instead of a value
+        return throwError(() => err); 
       })
     );
-    // return this.firestore.collection('ingredients').valueChanges({ idField: 'id' });
+    
   }
 
   // Add a new ingredient

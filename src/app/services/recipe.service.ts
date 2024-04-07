@@ -34,9 +34,7 @@ export class RecipeService {
       ref.where('ingredients', 'array-contains-any', selectedIngredients))
       .valueChanges({ idField: 'id' });
   }
-  // getRecipes() {
-  //   return this.firestore.collection('Recipes').valueChanges({ idField: 'id' });
-  // }
+  
 
   // Add a new recipe
   addRecipe(recipe: any) {

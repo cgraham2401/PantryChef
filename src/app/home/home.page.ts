@@ -23,25 +23,6 @@ export class HomePage implements OnInit {
   constructor(private camera: Camera, private recipeService: RecipeService) {}
 
   ngOnInit(): void {}
-
-  // takePicture(): void {
-  //   const options: CameraOptions = {
-  //     quality: 100,
-  //     destinationType: this.camera.DestinationType.DATA_URL,
-  //     encodingType: this.camera.EncodingType.JPEG,
-  //     mediaType: this.camera.MediaType.PICTURE,
-  //   };
-
-  //   this.camera.getPicture(options).then(
-  //     (imageData) => {
-  //       let base64Image = 'data:image/jpeg;base64,' + imageData;
-  //       console.log(base64Image);
-  //     },
-  //     (error) => {
-  //       console.error('Camera error:', error);
-  //     }
-  //   );
-  //}
   
   // Called when the user selects ingredients
   handleIngredientSelection(selectedIngredientNames: string[]): void {

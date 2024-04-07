@@ -12,9 +12,5 @@
 <ion-content>
   <app-ingredient-list (ingredientsSelected)="filterRecipes($event)"></app-ingredient-list>
   <app-recipe-list [recipes]="filteredRecipes"></app-recipe-list>
-  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="takePicture()">
-      <ion-icon name="camera"></ion-icon>
-    </ion-fab-button>
-  </ion-fab> -->
+  
 </ion-content>

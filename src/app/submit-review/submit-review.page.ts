@@ -120,7 +120,7 @@ saveReview() {
 
   this.firestore.collection('Reviews').doc(reviewId).set(reviewData).then(() => {
     console.log("Review saved successfully!");
-    // Optional: Reset form or navigate away
+    // Optional future enhancement: Reset form or navigate away
   }).catch(err => {
     console.error("Error saving review:", err);
   });

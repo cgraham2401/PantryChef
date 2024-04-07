@@ -28,15 +28,6 @@ export class IngredientListComponent implements OnInit {
     });
   }
     
-    
-  //   this.ingredientService.getIngredients().subscribe(data => {
-  //     // Initialize all ingredients as unselected
-  //     this.ingredients = data.map(ingredient => ({
-  //       ...ingredient,
-  //       selected: false
-  //     }));
-  //   });
-  // }
 
   submitSelection() {
     const selectedIngredients = this.ingredients.filter(ingredient => ingredient.selected).map(ingredient => ingredient.name);
